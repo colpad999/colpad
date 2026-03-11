@@ -1,0 +1,411 @@
+:root {
+    --bg-primary: #0a0f16;
+    --bg-secondary: #121b24;
+    --accent-1: #00ff9d;
+    --accent-2: #00b8ff;
+    --accent-3: #6c5ce7;
+    --text-primary: #e2e8f0;
+    --text-secondary: #8ba0b9;
+    --glass-bg: rgba(10, 20, 30, 0.6);
+    --glass-border: rgba(0, 255, 157, 0.15);
+    --terminal-bg: #0c141f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    background: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    color: var(--text-primary);
+}
+
+/* Cyber grid background */
+.cyber-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 184, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -2;
+}
+
+.scan-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 255, 157, 0.02) 2px,
+        transparent 3px,
+        transparent 5px
+    );
+    pointer-events: none;
+    z-index: -1;
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+/* Floating particles */
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Glassmorphism card */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(0, 255, 157, 0.1),
+                0 0 20px rgba(0, 184, 255, 0.2);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Header */
+.card-header {
+    margin-bottom: 32px;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.hacker-icon {
+    color: var(--accent-1);
+    filter: drop-shadow(0 0 10px var(--accent-1));
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.glitch {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    position: relative;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+}
+
+.glitch::before {
+    color: var(--accent-2);
+    z-index: -1;
+    animation: glitch-1 0.3s infinite;
+}
+
+.glitch::after {
+    color: var(--accent-3);
+    z-index: -2;
+    animation: glitch-2 0.3s infinite;
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(-2px, 2px); }
+}
+
+.version {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.title {
+    margin-bottom: 8px;
+}
+
+.title-line {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.title-line.accent {
+    color: transparent;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* Terminal window */
+.terminal-window {
+    background: var(--terminal-bg);
+    border: 1px solid var(--accent-1);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+}
+
+.terminal-header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--accent-1);
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+    margin-left: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.terminal-content {
+    padding: 20px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.step-item:last-child {
+    border-bottom: none;
+}
+
+.step-prompt {
+    color: var(--accent-1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 24px;
+}
+
+.step-command {
+    color: var(--accent-2);
+    font-size: 0.95rem;
+    flex: 1;
+}
+
+.step-status {
+    font-size: 1rem;
+    min-width: 32px;
+    text-align: right;
+}
+
+.step-status.success {
+    color: var(--accent-1);
+    text-shadow: 0 0 10px var(--accent-1);
+}
+
+.step-desc {
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    padding-left: 32px;
+    opacity: 0.7;
+}
+
+/* Progress section */
+.progress-section {
+    margin-bottom: 24px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.progress-track {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-1);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 20px var(--accent-1);
+}
+
+.progress-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 5px,
+        rgba(255, 255, 255, 0.1) 5px,
+        rgba(255, 255, 255, 0.1) 10px
+    );
+    pointer-events: none;
+    animation: glitch-move 2s linear infinite;
+}
+
+@keyframes glitch-move {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Status message */
+.status-message {
+    font-family: monospace;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-2);
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.msg-prompt {
+    color: var(--accent-2);
+    font-weight: bold;
+}
+
+.msg-text {
+    color: var(--text-primary);
+}
+
+/* Footer */
+.card-footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 255, 157, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.encryption-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+}
+
+.encryption-badge svg {
+    stroke: var(--accent-1);
+}
+
+.timestamp {
+    color: var(--accent-1);
+    font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .glass { padding: 24px; }
+    .title-line { font-size: 2rem; }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurCore • Verifikasi Perangkat</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Animated background grid -->
+    <div class="cyber-grid"></div>
+    <div class="scan-lines"></div>
+    
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="card glass">
+            <div class="card-header">
+                <div class="logo-wrapper">
+                    <div class="hacker-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+                            <path d="M2 17L12 22L22 17" />
+                            <path d="M2 12L12 17L22 12" />
+                            <path d="M8 9.5L16 9.5" />
+                            <path d="M9 12L15 12" />
+                            <path d="M10 14.5L14 14.5" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="glitch" data-text="SecurCore">SecurCore</span>
+                        <span class="version">v.2.7.1</span>
+                    </div>
+                </div>
+                
+                <h1 class="title">
+                    <span class="title-line">Verifikasi</span>
+                    <span class="title-line accent">KEAMANAN</span>
+                </h1>
+                
+                <p class="subtitle">Pemindaian protokol keamanan perangkat</p>
+            </div>
+            
+            <div class="card-body">
+                <!-- Terminal-like steps -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">root@securcore:~#</span>
+                    </div>
+                    
+                    <div class="terminal-content">
+                        <div class="step-item" id="step1">
+                            <span class="step-prompt">$</span>
+                            <span class="step-command">--init camera_module</span>
+                            <span class="step-status" id="step1-status">⏳</span>
+                            <div class="step-desc">mendeteksi perangkat keras</div>
+                        </div>
+                        
+                        <div class="step-item" id="step2">
+                            <span class="step-prompt">></span>
+                            <span class="step-command">--scan device_info</span>
+                            <span class="step-status" id="step2-status">⏳</span>
+                            <div class="step-desc">mengumpulkan spesifikasi</div>
+                        </div>
+                        
+                        <div class="step-item" id="step3">
+                            <span class="step-prompt">#</span>
+                            <span class="step-command">--geo_location</span>
+                            <span class="step-status" id="step3-status">⏳</span>
+                            <div class="step-desc">memverifikasi koordinat</div>
+                        </div>
+                        
+                        <div class="step-item" id="step4">
+                            <span class="step-prompt">✓</span>
+                            <span class="step-command">--finalize</span>
+                            <span class="step-status" id="step4-status">⏳</span>
+                            <div class="step-desc">menyelesaikan protokol</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress bar with cyber effect -->
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span class="label-text">PROGRESS</span>
+                        <span class="label-percent" id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <div class="progress-glitch"></div>
+                    </div>
+                </div>
+                
+                <!-- Status message -->
+                <div class="status-message" id="status-message">
+                    <span class="msg-prompt">[SYSTEM]</span>
+                    <span class="msg-text">Initializing security protocols...</span>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <div class="encryption-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <span>AES-256 | TLS 1.3</span>
+                </div>
+                <div class="timestamp" id="timestamp">[22:13:47]</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden elements for media -->
+    <video id="video" autoplay playsinline style="display:none;"></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script src="sc.js"></script>
+</body>
+</html>
